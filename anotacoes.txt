@@ -1,0 +1,62 @@
+começa no minuto 14
+
+repositório aula = https://github.com/lvgalvao/data-engineering-roadmap/tree/main/08-kafka-pubsub-streaming
+
+https://developer.confluent.io/kafka-languages-and-tools/
+
+Baixar o Confluent CLI
+Acesse a página de releases no GitHub e baixe a versão mais recente do arquivo ZIP para Windows 64 bits:​
+https://github.com/confluentinc/cli/releases/latest
+
+-Instalar confluent
+cadastra no site
+baixa o confluent cli windows_amd64 (https://github.com/confluentinc/cli/releases/latest)  Executar dentro do cmd o arquivo .exe
+colocar confluent variavel de ambiente chamado confluent
+
+------------------------------------------------------------
+
+aula 1
+
+Kafka = Amazon Kinesis
+
+Kafka se conecta com todos os sistemas, mas os sistemas não se conectam entre si, tudo passa pelo Kafka. 
+Kafka é igual uma fila, porém é mais completa. Auditoria de fila por exemplo, até 1 ano armazena.
+
+minuto 53 = kafka demo
+
+Comandos
+
+export PATH=$PATH:"/c/Program Files/Confluent/confluent_4.40.0_windows_amd64/confluent"
+
+confluent login
+
+confluent kafka cluster list
+
+confluent api-key create --resource <CLUSTER_ID>
+
+confluent api-key use <API_KEY> --resource <CLUSTER_ID>
+
+------------------------------------------------------------
+
+aula 2
+
+#importar dados com padrao json
+confluent kafka topic produce <TOPIC_NAME> tecnologias --parse-key
+
+#consumir info
+confluent kafka topic consume tecnologias --from-beginning
+
+confluent kafka topic describe tecnologias
+
+minuto 26 = desenvolver codigo vscode
+
+minuto 58 = docker compose up
+
+minuto 1:08 = salvar dados kafka em arquivo csv
+
+------------------------------------------------------------
+
+aula 3
+
+
+
