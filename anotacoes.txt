@@ -57,6 +57,58 @@ minuto 1:08 = salvar dados kafka em arquivo csv
 ------------------------------------------------------------
 
 aula 3
+ 
+#consumir dados do confluent
+confluent kafka topic consume sync_postgresvendas --from-beginning
 
+#dados fake para banco de dados
+CREATE TABLE vendas (
+    id INTEGER PRIMARY KEY,
+    data_venda DATE NOT NULL,
+    produto_id INTEGER NOT NULL,
+    quantidade INTEGER NOT NULL,
+    valor_total NUMERIC(10, 2) NOT NULL
+);
+
+INSERT INTO vendas (id, data_venda, produto_id, quantidade, valor_total) VALUES (1, '2025-05-10', 3, 3, 650.41);
+INSERT INTO vendas (id, data_venda, produto_id, quantidade, valor_total) VALUES (2, '2025-11-04', 49, 17, 784.45);
+INSERT INTO vendas (id, data_venda, produto_id, quantidade, valor_total) VALUES (3, '2025-11-15', 44, 1, 327.06);
+INSERT INTO vendas (id, data_venda, produto_id, quantidade, valor_total) VALUES (4, '2025-05-30', 29, 7, 743.02);
+INSERT INTO vendas (id, data_venda, produto_id, quantidade, valor_total) VALUES (5, '2025-07-03', 49, 13, 270.11);
+INSERT INTO vendas (id, data_venda, produto_id, quantidade, valor_total) VALUES (6, '2025-03-02', 4, 11, 693.64);
+INSERT INTO vendas (id, data_venda, produto_id, quantidade, valor_total) VALUES (7, '2025-01-23', 35, 6, 432.59);
+INSERT INTO vendas (id, data_venda, produto_id, quantidade, valor_total) VALUES (8, '2025-01-25', 20, 10, 737.4);
+INSERT INTO vendas (id, data_venda, produto_id, quantidade, valor_total) VALUES (9, '2025-04-07', 18, 10, 276.59);
+INSERT INTO vendas (id, data_venda, produto_id, quantidade, valor_total) VALUES (10, '2025-03-31', 4, 5, 470.38);
+INSERT INTO vendas (id, data_venda, produto_id, quantidade, valor_total) VALUES (11, '2025-05-19', 26, 3, 389.46);
+INSERT INTO vendas (id, data_venda, produto_id, quantidade, valor_total) VALUES (12, '2025-09-22', 11, 18, 153.99);
+INSERT INTO vendas (id, data_venda, produto_id, quantidade, valor_total) VALUES (13, '2025-01-04', 47, 14, 862.44);
+INSERT INTO vendas (id, data_venda, produto_id, quantidade, valor_total) VALUES (14, '2025-05-13', 48, 5, 737.77);
+INSERT INTO vendas (id, data_venda, produto_id, quantidade, valor_total) VALUES (15, '2025-06-01', 37, 3, 52.37);
+INSERT INTO vendas (id, data_venda, produto_id, quantidade, valor_total) VALUES (16, '2025-04-22', 47, 8, 902.35);
+INSERT INTO vendas (id, data_venda, produto_id, quantidade, valor_total) VALUES (17, '2025-05-06', 37, 19, 107.84);
+INSERT INTO vendas (id, data_venda, produto_id, quantidade, valor_total) VALUES (18, '2025-09-11', 6, 8, 883.48);
+INSERT INTO vendas (id, data_venda, produto_id, quantidade, valor_total) VALUES (19, '2025-07-15', 44, 19, 971.48);
+INSERT INTO vendas (id, data_venda, produto_id, quantidade, valor_total) VALUES (20, '2025-01-17', 30, 17, 230.04);
+INSERT INTO vendas (id, data_venda, produto_id, quantidade, valor_total) VALUES (21, '2025-01-08', 23, 18, 990.84);
+INSERT INTO vendas (id, data_venda, produto_id, quantidade, valor_total) VALUES (22, '2025-10-08', 32, 17, 504.77);
+INSERT INTO vendas (id, data_venda, produto_id, quantidade, valor_total) VALUES (23, '2025-10-28', 4, 11, 576.03);
+INSERT INTO vendas (id, data_venda, produto_id, quantidade, valor_total) VALUES (24, '2025-02-15', 50, 17, 958.33);
+INSERT INTO vendas (id, data_venda, produto_id, quantidade, valor_total) VALUES (25, '2025-03-29', 19, 12, 717.45);
+INSERT INTO vendas (id, data_venda, produto_id, quantidade, valor_total) VALUES (26, '2025-07-24', 36, 2, 44.11);
+INSERT INTO vendas (id, data_venda, produto_id, quantidade, valor_total) VALUES (27, '2025-04-30', 13, 14, 447.7);
+INSERT INTO vendas (id, data_venda, produto_id, quantidade, valor_total) VALUES (28, '2025-01-08', 16, 17, 421.09);
+INSERT INTO vendas (id, data_venda, produto_id, quantidade, valor_total) VALUES (29, '2025-06-13', 43, 13, 50.62);
+INSERT INTO vendas (id, data_venda, produto_id, quantidade, valor_total) VALUES (30, '2025-10-11', 49, 9, 207.09);
+
+#duplicar valores existentes para criar 200mil linhas
+INSERT INTO vendas (id, data_venda, produto_id, quantidade, valor_total)
+SELECT 
+    ROW_NUMBER() OVER () + (SELECT COALESCE(MAX(id), 0) FROM vendas) AS id,
+    '2025-01-01'::date + (random() * 320)::integer AS data_venda,
+    (random() * 49 + 1)::integer AS produto_id,
+    (random() * 19 + 1)::integer AS quantidade,
+    (random() * 989.99 + 10)::numeric(10,2) AS valor_total
+FROM generate_series(1, 200000);
 
 
