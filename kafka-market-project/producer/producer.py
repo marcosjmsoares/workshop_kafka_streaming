@@ -5,6 +5,9 @@ import uuid
 from faker import Faker
 import json
 import os
+from dotenv import load_dotenv
+from pathlib import Path
+
 
 fake = Faker('pt_BR')
 

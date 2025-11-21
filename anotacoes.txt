@@ -57,7 +57,11 @@ minuto 1:08 = salvar dados kafka em arquivo csv
 ------------------------------------------------------------
 
 aula 3
- 
+
+minuto 41 = consumir arquivo avro
+
+minuto 43 = ksql
+
 #consumir dados do confluent
 confluent kafka topic consume sync_postgresvendas --from-beginning
 
