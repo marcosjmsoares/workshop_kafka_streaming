@@ -10,7 +10,7 @@ import plotly.express as px
 load_dotenv()
 
 # Configuração do PostgreSQL
-db_url = 'postgresql://postgres_kafka_user:UQ4PAxSQbukeWVcFEDpdNquS6zhbt8zs@dpg-cq8vi35ds78s7396a4og-a.oregon-postgres.render.com/postgres_kafka_sink'
+db_url = 'postgresql://postgres_kafka_user'
 engine = create_engine(db_url)
 
 # Função para carregar dados do banco de dados
